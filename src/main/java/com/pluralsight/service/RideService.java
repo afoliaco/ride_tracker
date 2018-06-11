@@ -8,4 +8,5 @@ public interface RideService {
 
 	List<Ride> getRides();
 
+	Ride creteRide(Ride ride);
 }
