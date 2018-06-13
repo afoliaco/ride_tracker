@@ -4,6 +4,11 @@ public class Ride {
 
 	private String name;
 	private int duration;
+	private int id;
+
+	public int getId() {
+		return id;
+	}
 
 	public int getDuration() {
 		return duration;
@@ -20,5 +25,9 @@ public class Ride {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 }

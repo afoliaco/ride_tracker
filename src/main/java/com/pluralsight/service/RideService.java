@@ -9,4 +9,8 @@ public interface RideService {
 	List<Ride> getRides();
 
 	Ride creteRide(Ride ride);
+
+	Ride getRide(Integer id);
+
+    Ride updateRide(Ride ride);
 }
