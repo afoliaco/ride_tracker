@@ -1,12 +1,18 @@
 package com.pluralsight.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pluralsight.model.Ride;
 import com.pluralsight.repository.RideRepository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.xml.crypto.Data;
 
 @Service("rideService")
 public class RideServiceImpl implements RideService {
@@ -34,5 +40,27 @@ public class RideServiceImpl implements RideService {
     @Override
     public Ride updateRide(Ride ride) {
         return rideRepository.updateRide(ride);
+    }
+
+    @Override
+    @Transactional
+    public void batch() {
+        List<Ride> rides = rideRepository.getRides();
+
+        List<Object[]> pairs = new ArrayList<>();
+
+        for (Ride ride : rides) {
+            Object[] tmp =  {new Date(), ride.getId()};
+            pairs.add(tmp);
+        }
+
+        rideRepository.updateRides(pairs);
+
+        throw  new DataAccessException("testing exception handling"){};
+    }
+
+    @Override
+    public void deleteRite(Integer id) {
+        rideRepository.deleteRite(id);
     }
 }

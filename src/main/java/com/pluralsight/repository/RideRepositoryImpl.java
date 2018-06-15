@@ -5,6 +5,7 @@ import com.pluralsight.repository.util.RideRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository("rideRepository")
 public class RideRepositoryImpl implements RideRepository {
@@ -55,9 +58,32 @@ public class RideRepositoryImpl implements RideRepository {
 
     @Override
     public Ride updateRide(Ride ride) {
+
         jdbcTemplate.update("update ride set name = ?, duration = ? where id = ?",ride.getName(), ride.getDuration(), ride.getId());
 
         return  ride;
+    }
+
+    @Override
+    public void updateRides(List<Object[]> pairs) {
+        jdbcTemplate.batchUpdate("update ride set ride_date =? where id = ?",pairs);
+    }
+
+    @Override
+    public void deleteRite(Integer id) {
+        //jdbcTemplate.update("delete from ride where id = ?", id);
+
+        NamedParameterJdbcTemplate nameTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+
+        Map<String,Object> paramMap = new HashMap<>();
+
+        paramMap.put("id", id);
+
+        nameTemplate.update("delete from ride where id = :id", paramMap);
+
+
+
+
     }
 
 }
