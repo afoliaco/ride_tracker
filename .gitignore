@@ -15,6 +15,7 @@ target/m2e-wtp/web-resources/META-INF/maven/com.pluralsight/ride_tracker/pom.xml
 target/classes/log4j.properties
 target/m2e-wtp/web-resources/META-INF/maven/com.pluralsight/ride_tracker/pom.properties
 /target/
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
@@ -69,3 +70,5 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+.idea/misc.xml
+.idea/vcs.xml
